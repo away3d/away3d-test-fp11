@@ -2,8 +2,8 @@ package
 {
 
 	import away3d.bounds.BoundingSphere;
-	import away3d.core.pick.PickingMode;
-	import away3d.core.raycast.colliders.picking.CpuPickingMethod;
+	import away3d.core.pick.PickingColliderType;
+	import away3d.core.pick.PickingType;
 	import away3d.entities.Entity;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
@@ -36,8 +36,8 @@ package
 			_view.camera.lens.far = 1000000;
 
 			// Choose global picking method
-			_view.mousePicker = PickingMode.RAYCAST_PICKER;
-//			_view.pickingMethod = GlobalPickingMethod.SHADER;
+			_view.mousePicker = PickingType.RAYCAST_BEST_HIT;
+//			_view.mousePicker = PickingType.SHADER;
 
 			// Init materials.
 			_blackMaterial = new ColorMaterial( 0x333333 );
@@ -112,10 +112,10 @@ package
 			var usesTriangleCollider:Boolean = /*false;//*/Math.random() > 0.5;
 			if( usesTriangleCollider ) {
 				// Choose a triangle ray picking method.
-//				entity.rayPickingMethod = EntityPickingMethod.BOUNDS_ONLY;
-//				entity.rayPickingMethod = EntityPickingMethod.AS3_TRIANGLE_HIT;
-//				entity.rayPickingMethod = EntityPickingMethod.PB_TRIANGLE_HIT;
-				entity.rayPickingMethod = CpuPickingMethod.AUTO_MESH;
+//				entity.pickingCollider = EntityPickingMethod.BOUNDS_ONLY;
+//				entity.pickingCollider = EntityPickingMethod.AS3_FIRST_ENCOUNTERED;
+//				entity.pickingCollider = EntityPickingMethod.PB_FIRST_ENCOUNTERED;
+				entity.pickingCollider = PickingColliderType.AUTO_FIRST_ENCOUNTERED;
 			}
 
 			// Randomize bounds type.

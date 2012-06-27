@@ -4,8 +4,8 @@ package
 	import away3d.animators.SmoothSkeletonAnimator;
 	import away3d.animators.data.SkeletonAnimationSequence;
 	import away3d.animators.data.SkeletonAnimationState;
-	import away3d.core.pick.PickingMode;
-	import away3d.core.raycast.colliders.picking.CpuPickingMethod;
+	import away3d.core.pick.PickingColliderType;
+	import away3d.core.pick.PickingType;
 	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
 	import away3d.library.AssetLibrary;
@@ -53,8 +53,8 @@ package
 			_view.forceMouseMove = true;
 
 			// Choose global picking method
-//			_view.pickingMethod = GlobalPickingMethod.CPU;
-			_view.mousePicker = PickingMode.SHADER_PICKER;
+//			_view.mousePicker = PickingType.RAYCAST_BEST_HIT;
+			_view.mousePicker = PickingType.SHADER;
 
 			// Init materials.
 			_bodyMaterial = new TextureMaterial( new BitmapTexture( new BodyDiffuse().bitmapData ) );
@@ -83,7 +83,7 @@ package
 				_view.scene.addChild( _mesh );
 
 				// Set up interactivity.
-				_mesh.rayPickingMethod = CpuPickingMethod.HIGH_POLY_MESH;
+				_mesh.pickingCollider = PickingColliderType.PB_BEST_HIT;
 
 				// Apply interactivity.
 				_mesh.mouseEnabled = _mesh.mouseChildren = _mesh.mouseDetails = true;

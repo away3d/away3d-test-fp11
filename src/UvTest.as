@@ -3,8 +3,8 @@ package
 
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.base.Object3D;
-	import away3d.core.pick.PickingMode;
-	import away3d.core.raycast.colliders.picking.CpuPickingMethod;
+	import away3d.core.pick.PickingColliderType;
+	import away3d.core.pick.PickingType;
 	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
 	import away3d.events.LoaderEvent;
@@ -57,8 +57,8 @@ package
 			_view.forceMouseMove = true;
 
 			// Choose global picking method
-			_view.mousePicker = PickingMode.RAYCAST_PICKER;
-//			_view.pickingMethod = GlobalPickingMethod.GPU;
+			_view.mousePicker = PickingType.RAYCAST_FIRST_ENCOUNTERED;
+//			_view.mousePicker = PickingType.SHADER;
 
 			// Init Objects.
 			AssetLibrary.enableParser( OBJParser );
@@ -92,7 +92,10 @@ package
 			model.material = textureMaterial;
 
 			// Set up interactivity.
-			model.rayPickingMethod = CpuPickingMethod.HIGH_POLY_MESH;
+			//model.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
+			model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+			//model.pickingCollider = PickingColliderType.PB_FIRST_ENCOUNTERED;
+			//model.pickingCollider = PickingColliderType.PB_BEST_HIT;
 
 			// Apply interactivity.
 			model.mouseEnabled = model.mouseChildren = model.mouseDetails = true;

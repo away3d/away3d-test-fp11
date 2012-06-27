@@ -2,8 +2,8 @@ package
 {
 
 	import away3d.bounds.BoundingSphere;
-	import away3d.core.pick.PickingMode;
-	import away3d.core.raycast.colliders.picking.CpuPickingMethod;
+	import away3d.core.pick.PickingColliderType;
+	import away3d.core.pick.PickingType;
 	import away3d.entities.Entity;
 	import away3d.entities.Mesh;
 	import away3d.events.MouseEvent3D;
@@ -16,7 +16,7 @@ package
 	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 
-
+	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
 	public class ManyObjectsTest extends TestBase
 	{
 		private var _blackMaterial:ColorMaterial;
@@ -39,7 +39,7 @@ package
 
 			// Choose global picking method
 //			_view.pickingMethod = GlobalPickingMethod.CPU;
-			_view.mousePicker = PickingMode.RAYCAST_PICKER_1;
+			_view.mousePicker = PickingType.RAYCAST_FIRST_ENCOUNTERED;
 //			_view.pickingMethod = GlobalPickingMethod.SHADER;
 
 			// Init materials.
@@ -107,8 +107,8 @@ package
 			var usesTriangleCollider:Boolean = /*false;//*/Math.random() > 0.5;
 			if( usesTriangleCollider ) {
 				// Choose a triangle ray picking method.
-//				entity.rayPickingMethod = CpuPickingMethod.BOUNDS_ONLY;
-				entity.rayPickingMethod = CpuPickingMethod.LOW_POLY_MESH;
+//				entity.pickingCollider = CpuPickingMethod.BOUNDS_ONLY;
+				entity.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
 			}
 
 			// Randomize bounds type.

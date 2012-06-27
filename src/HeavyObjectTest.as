@@ -4,8 +4,8 @@ package
 	import away3d.containers.ObjectContainer3D;
 	import away3d.core.base.Object3D;
 	import away3d.core.base.SubMesh;
-	import away3d.core.pick.PickingMode;
-	import away3d.core.raycast.colliders.picking.CpuPickingMethod;
+	import away3d.core.pick.PickingColliderType;
+	import away3d.core.pick.PickingType;
 	import away3d.entities.Entity;
 	import away3d.entities.Mesh;
 	import away3d.events.AssetEvent;
@@ -25,7 +25,7 @@ package
 
 
 
-
+	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
 	public class HeavyObjectTest extends TestBase
 	{
 		[Embed(source="/../embeds/head/head.awd", mimeType="application/octet-stream")]
@@ -48,8 +48,8 @@ package
 			_view.forceMouseMove = true;
 
 			// Choose global picking method
-			_view.mousePicker = PickingMode.RAYCAST_PICKER;
-//			_view.pickingMethod = GlobalPickingMethod.SHADER;
+			_view.mousePicker = PickingType.RAYCAST_BEST_HIT;
+//			_view.mousePicker = PickingType.SHADER;
 
 			// Init Objects.
 			AssetLibrary.enableParser( AWD2Parser );
@@ -86,10 +86,10 @@ package
 			iterateContainerChildrenMeshes( _model, applyRandomMaterialsOnSubMeshes );
 
 			// Set up interactivity.
-//			_model.rayPickingMethod = EntityPickingMethod.BOUNDS_ONLY;
-//			_model.rayPickingMethod = EntityPickingMethod.AS3_TRIANGLE_HIT;
-			_model.rayPickingMethod = CpuPickingMethod.HIGH_POLY_MESH;
-//			_model.rayPickingMethod = EntityPickingMethod.AUTO_TRIANGLE_HIT;
+//			_model.pickingCollider = PickingColliderType.BOUNDS_ONLY;
+//			_model.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
+			_model.pickingCollider = PickingColliderType.PB_FIRST_ENCOUNTERED;
+//			_model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
 
 			// Apply interactivity.
 			_model.mouseEnabled = _model.mouseChildren = _model.mouseDetails = true;
