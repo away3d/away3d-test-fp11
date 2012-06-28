@@ -84,7 +84,8 @@ package
 
 				// Set up interactivity.
 				_mesh.pickingCollider = PickingColliderType.PB_BEST_HIT;
-
+				//_mesh.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+				
 				// Apply interactivity.
 				_mesh.mouseEnabled = _mesh.mouseChildren = _mesh.mouseDetails = true;
 				enableMeshMouseListeners( _mesh );

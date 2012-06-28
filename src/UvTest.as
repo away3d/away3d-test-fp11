@@ -93,9 +93,9 @@ package
 
 			// Set up interactivity.
 			//model.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
-			model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+			//model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
 			//model.pickingCollider = PickingColliderType.PB_FIRST_ENCOUNTERED;
-			//model.pickingCollider = PickingColliderType.PB_BEST_HIT;
+			model.pickingCollider = PickingColliderType.PB_BEST_HIT;
 
 			// Apply interactivity.
 			model.mouseEnabled = model.mouseChildren = model.mouseDetails = true;
