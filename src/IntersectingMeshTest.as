@@ -61,9 +61,9 @@ package
 			if( usesTriangleCollider ) {
 				// Choose a triangle ray picking method.
 				// entity.pickingCollider = PickingColliderType.BOUNDS_ONLY;
-				entity.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+//				entity.pickingCollider = PickingColliderType.AS3_BEST_HIT;
 //				entity.pickingCollider = PickingColliderType.PB_BEST_HIT;
-//				entity.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
+				entity.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
 			}
 
 			// Randomize bounds type.
