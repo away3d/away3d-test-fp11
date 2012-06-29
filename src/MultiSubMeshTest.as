@@ -8,7 +8,8 @@ package
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.ConeGeometry;
-
+	
+	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
 	public class MultiSubMeshTest extends TestBase
 	{
 		public function MultiSubMeshTest() {
@@ -50,7 +51,7 @@ package
 			entity.subMeshes[ 1 ].material = new ColorMaterial( 0x0000FF );
 
 			// For shader based picking.
-			entity.mouseDetails = true;
+			entity.shaderPickingDetails = true;
 
 			// Randomly decide if the entity has a triangle collider.
 			var usesTriangleCollider:Boolean = true;//Math.random() > 0.5;

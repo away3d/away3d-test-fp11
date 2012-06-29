@@ -98,7 +98,7 @@ package
 			model.pickingCollider = PickingColliderType.PB_BEST_HIT;
 
 			// Apply interactivity.
-			model.mouseEnabled = model.mouseChildren = model.mouseDetails = true;
+			model.mouseEnabled = model.mouseChildren = model.shaderPickingDetails = true;
 			enableMeshMouseListeners( model );
 
 			_view.scene.addChild( model );

@@ -92,7 +92,7 @@ package
 //			_model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
 
 			// Apply interactivity.
-			_model.mouseEnabled = _model.mouseChildren = _model.mouseDetails = true;
+			_model.mouseEnabled = _model.mouseChildren = _model.shaderPickingDetails = true;
 			enableMeshMouseListeners( _model );
 
 			_view.scene.addChild( _model );

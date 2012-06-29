@@ -101,7 +101,7 @@ package
 			}
 
 			// For shader based picking.
-			entity.mouseDetails = true;
+			entity.shaderPickingDetails = true;
 
 			// Randomly decide if the entity has a triangle collider.
 			var usesTriangleCollider:Boolean = /*false;//*/Math.random() > 0.5;

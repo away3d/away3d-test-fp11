@@ -12,8 +12,8 @@ package
 	import away3d.primitives.SphereGeometry;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
-
-
+	
+	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
 	public class LineUpTest extends TestBase
 	{
 		private var _blackMaterial:ColorMaterial;
@@ -106,7 +106,7 @@ package
 			}
 
 			// For shader based picking.
-			entity.mouseDetails = true;
+			entity.shaderPickingDetails = true;
 
 			// Randomly decide if the entity has a triangle collider.
 			var usesTriangleCollider:Boolean = /*false;//*/Math.random() > 0.5;
