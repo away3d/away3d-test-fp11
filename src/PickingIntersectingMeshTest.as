@@ -2,7 +2,6 @@ package
 {
 
 	import away3d.bounds.BoundingSphere;
-	import away3d.core.base.Geometry;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.core.pick.PickingType;
 	import away3d.entities.Mesh;
@@ -10,9 +9,9 @@ package
 	import away3d.primitives.ConeGeometry;
 	
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
-	public class MultiSubMeshTest extends TestBase
+	public class PickingIntersectingMeshTest extends PickingTestBase
 	{
-		public function MultiSubMeshTest() {
+		public function PickingIntersectingMeshTest() {
 			super();
 		}
 
@@ -30,7 +29,21 @@ package
 //			_view.mousePicker = PickingType.SHADER;
 
 			// Init Objects.
-			createEntity();
+			createIntersectingObjects();
+		}
+
+		private function createIntersectingObjects():void {
+
+			var objectA:Mesh = createEntity();
+			objectA.material = new ColorMaterial( 0xFF0000 );
+			objectA.rotationX = -90;
+			objectA.x = 30;
+
+			var objectB:Mesh = createEntity();
+			objectB.material = new ColorMaterial( 0x0000FF );
+			objectB.rotationZ = -90;
+			objectB.x = -30;
+
 		}
 
 		private function createEntity():Mesh {
@@ -39,16 +52,7 @@ package
 			entity.showBounds = true;
 
 			// Geometry.
-			var geometryA:Geometry = new ConeGeometry( 150, 400 );
-			var geometryB:Geometry = new ConeGeometry( 400, 150 );
-			var geometryC:Geometry = new Geometry();
-			geometryC.addSubGeometry( geometryA.subGeometries[ 0 ] );
-			geometryC.addSubGeometry( geometryB.subGeometries[ 0 ] );
-			entity.geometry = geometryC;
-
-			// Sub-mesh materials.
-			entity.subMeshes[ 0 ].material = new ColorMaterial( 0x00FF00 );
-			entity.subMeshes[ 1 ].material = new ColorMaterial( 0x0000FF );
+			entity.geometry = new ConeGeometry( 150, 400 );
 
 			// For shader based picking.
 			entity.shaderPickingDetails = true;
@@ -57,9 +61,9 @@ package
 			var usesTriangleCollider:Boolean = true;//Math.random() > 0.5;
 			if( usesTriangleCollider ) {
 				// Choose a triangle ray picking method.
-//				entity.rayPickingMethod = EntityPickingMethod.BOUNDS_ONLY;
-//				entity.rayPickingMethod = EntityPickingMethod.AS3_TRIANGLE_HIT;
-//				entity.rayPickingMethod = EntityPickingMethod.PB_TRIANGLE_HIT;
+				// entity.pickingCollider = PickingColliderType.BOUNDS_ONLY;
+//				entity.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+//				entity.pickingCollider = PickingColliderType.PB_BEST_HIT;
 				entity.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
 			}
 

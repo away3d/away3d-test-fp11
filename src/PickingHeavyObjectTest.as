@@ -26,7 +26,7 @@ package
 
 
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
-	public class HeavyObjectTest extends TestBase
+	public class PickingHeavyObjectTest extends PickingTestBase
 	{
 		[Embed(source="/../embeds/head/head.awd", mimeType="application/octet-stream")]
 		private var HeadAsset:Class;
@@ -36,7 +36,7 @@ package
 
 		private var _model:Mesh;
 
-		public function HeavyObjectTest() {
+		public function PickingHeavyObjectTest() {
 			super();
 		}
 

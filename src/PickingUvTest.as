@@ -28,7 +28,7 @@ package
 
 
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
-	public class UvTest extends TestBase
+	public class PickingUvTest extends PickingTestBase
 	{
 		[Embed(source="/../embeds/head/head.obj", mimeType="application/octet-stream")]
 		private var HeadAsset:Class;
@@ -39,7 +39,7 @@ package
 
 		private const TEXTURE_SIZE:uint = 2048;
 
-		public function UvTest() {
+		public function PickingUvTest() {
 			super();
 		}
 

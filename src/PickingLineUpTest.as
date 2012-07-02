@@ -14,7 +14,7 @@ package
 	import flash.ui.Keyboard;
 	
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
-	public class LineUpTest extends TestBase
+	public class PickingLineUpTest extends PickingTestBase
 	{
 		private var _blackMaterial:ColorMaterial;
 		private var _grayMaterial:ColorMaterial;
@@ -23,7 +23,7 @@ package
 		private var _entities:Vector.<Entity>;
 		private var _rotateEntities:Boolean;
 
-		public function LineUpTest() {
+		public function PickingLineUpTest() {
 			super();
 		}
 

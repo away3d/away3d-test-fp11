@@ -16,7 +16,7 @@ package
 	import away3d.textures.BitmapTexture;
 
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
-	public class AnimatedTest extends TestBase
+	public class PickingAnimatedTest extends PickingTestBase
 	{
 		// Textures.
 		// body diffuse map
@@ -41,7 +41,7 @@ package
 		private var _animator:SmoothSkeletonAnimator;
 		private var _mesh:Mesh;
 
-		public function AnimatedTest() {
+		public function PickingAnimatedTest() {
 			super();
 		}
 

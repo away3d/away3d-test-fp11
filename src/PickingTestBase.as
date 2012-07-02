@@ -28,7 +28,7 @@ package
 	import flash.events.MouseEvent;
 	import flash.geom.Vector3D;
 
-	public class TestBase extends Sprite
+	public class PickingTestBase extends Sprite
 	{
 		protected var _view:View3D;
 		protected var _cameraController:FreeFlyCameraController;
@@ -38,7 +38,7 @@ package
 		protected var _locationHint:ObjectContainer3D;
 		protected var _normalTracer:SegmentSet;
 
-		public function TestBase() {
+		public function PickingTestBase() {
 			addEventListener( Event.ADDED_TO_STAGE, stageInitHandler );
 		}
 

@@ -17,7 +17,7 @@ package
 	import flash.ui.Keyboard;
 
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
-	public class ManyObjectsTest extends TestBase
+	public class PickingManyObjectsTest extends PickingTestBase
 	{
 		private var _blackMaterial:ColorMaterial;
 		private var _grayMaterial:ColorMaterial;
@@ -26,7 +26,7 @@ package
 		private var _entities:Vector.<Entity>;
 		private var _rotateEntities:Boolean;
 
-		public function ManyObjectsTest() {
+		public function PickingManyObjectsTest() {
 			super();
 		}
 
