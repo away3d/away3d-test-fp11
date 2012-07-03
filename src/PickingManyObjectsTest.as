@@ -16,7 +16,7 @@ package
 	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 
-	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
+	[SWF(backgroundColor="#000000", frameRate="60")]
 	public class PickingManyObjectsTest extends PickingTestBase
 	{
 		private var _blackMaterial:ColorMaterial;
@@ -35,7 +35,7 @@ package
 			// Setup view.
 			_view.backgroundColor = 0xCCCCCC;
 			_view.antiAlias = 4;
-			_view.forceMouseMove = true;
+			_view.forceMouseMove = false;
 
 			// Choose global picking method
 //			_view.pickingMethod = GlobalPickingMethod.CPU;

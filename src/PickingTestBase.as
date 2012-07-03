@@ -191,7 +191,7 @@ package
 		}
 
 		protected function onMeshMouseClick( event:MouseEvent3D ):void {
-			trace( "mesh clicked: " + event.object.name );
+			trace( "mesh clicked: " + event.object.name + ", renderable: " + event.renderable );
 		}
 
 		protected function stageMouseUpHandler( event:MouseEvent ):void {

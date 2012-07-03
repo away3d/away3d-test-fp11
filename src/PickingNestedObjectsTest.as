@@ -1,7 +1,10 @@
 package {
 
+	import away3d.bounds.BoundingVolumeBase;
+	import away3d.containers.ObjectContainer3D;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.core.pick.PickingType;
+	import away3d.entities.Entity;
 	import away3d.entities.Mesh;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.SphereGeometry;
@@ -72,7 +75,7 @@ package {
 			_view.scene.addChild( container );
 
 			// Sub-container.
-			var subContainer:Mesh = new Mesh();
+			var subContainer:ObjectContainer3D = new ObjectContainer3D();
 			subContainer.name = "subContainer";
 			container.addChild( subContainer );
 
@@ -91,6 +94,17 @@ package {
 			enableMeshMouseListeners( childA );
 			subContainer.addChild( childA );
 //			_view.scene.addChild( childA );
+
+			traceObjectBounds( container );
+			traceObjectBounds( subContainer );
+			traceObjectBounds( childA );
+		}
+
+		private function traceObjectBounds( entity:ObjectContainer3D ):void {
+			trace( "Bounds info for " + entity.name + " ----------" );
+			trace( "width: " + entity.minX + ", " + entity.maxX );
+			trace( "height: " + entity.minY + ", " + entity.maxY );
+			trace( "depth: " + entity.minZ + ", " + entity.maxZ );
 		}
 
 		// ---------------------------------------------------------------------
