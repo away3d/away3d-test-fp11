@@ -48,11 +48,8 @@ package
 
 		private function createEntity():Mesh {
 
-			var entity:Mesh = new Mesh();
+			var entity:Mesh = new Mesh(new ConeGeometry( 150, 400 ));
 			entity.showBounds = true;
-
-			// Geometry.
-			entity.geometry = new ConeGeometry( 150, 400 );
 
 			// For shader based picking.
 			entity.shaderPickingDetails = true;

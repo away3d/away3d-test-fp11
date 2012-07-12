@@ -34,7 +34,7 @@ package
 		[Embed(source="/../embeds/troll/troll.AWD", mimeType="application/octet-stream")]
 		private var TrollAsset:Class;
 
-		private var _model:Mesh;
+		private var _model:ObjectContainer3D;
 
 		public function PickingHeavyObjectTest() {
 			super();
@@ -61,7 +61,7 @@ package
 			if( _model ) {
 				_view.scene.removeChild( _model );
 			}
-			_model = new Mesh();
+			_model = new ObjectContainer3D();
 			AssetLibrary.addEventListener( AssetEvent.ASSET_COMPLETE, onAssetComplete );
 			AssetLibrary.addEventListener( LoaderEvent.RESOURCE_COMPLETE, onResourceComplete );
 			AssetLibrary.loadData( data );

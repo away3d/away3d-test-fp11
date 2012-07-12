@@ -68,7 +68,7 @@ package {
 		private function test3d():void {
 
 			// Main container.
-			var container:Mesh = new Mesh();
+			var container:ObjectContainer3D = new ObjectContainer3D();
 			container.name = "container";
 //			container.mouseEnabled = true; // is false by default
 //			container.mouseChildren = false; // is true by default

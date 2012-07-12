@@ -35,8 +35,6 @@ package
 
 		private function createEntity():Mesh {
 
-			var entity:Mesh = new Mesh();
-			entity.showBounds = true;
 
 			// Geometry.
 			var geometryA:Geometry = new ConeGeometry( 150, 400 );
@@ -44,7 +42,9 @@ package
 			var geometryC:Geometry = new Geometry();
 			geometryC.addSubGeometry( geometryA.subGeometries[ 0 ] );
 			geometryC.addSubGeometry( geometryB.subGeometries[ 0 ] );
-			entity.geometry = geometryC;
+			
+			var entity:Mesh = new Mesh(geometryC);
+			entity.showBounds = true;
 
 			// Sub-mesh materials.
 			entity.subMeshes[ 0 ].material = new ColorMaterial( 0x00FF00 );

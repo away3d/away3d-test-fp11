@@ -1,6 +1,7 @@
 package
 {
 
+	import away3d.core.base.Geometry;
 	import away3d.bounds.BoundingSphere;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.core.pick.PickingType;
@@ -91,20 +92,21 @@ package
 
 		private function createEntity():Mesh {
 
-			var entity:Mesh = new Mesh();
 
 			// Geometry.
 			var randGeometry:Number = Math.random();
+			var geometry:Geometry;
 			if( randGeometry > 0.66 ) {
-				entity.geometry = new CubeGeometry();
+				geometry = new CubeGeometry();
 			}
 			else if( randGeometry > 0.33 ) {
-				entity.geometry = new SphereGeometry();
+				geometry = new SphereGeometry();
 			}
 			else {
-				entity.geometry = new CylinderGeometry();
+				geometry = new CylinderGeometry();
 			}
 
+			var entity:Mesh = new Mesh(geometry);
 			// For shader based picking.
 			entity.shaderPickingDetails = true;
 

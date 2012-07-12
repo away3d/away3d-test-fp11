@@ -1,19 +1,16 @@
 package
 {
 
-	import away3d.animators.SmoothSkeletonAnimator;
-	import away3d.animators.data.SkeletonAnimationSequence;
-	import away3d.animators.data.SkeletonAnimationState;
-	import away3d.core.pick.PickingColliderType;
-	import away3d.core.pick.PickingType;
-	import away3d.entities.Mesh;
-	import away3d.events.AssetEvent;
-	import away3d.library.AssetLibrary;
-	import away3d.library.assets.AssetType;
-	import away3d.loaders.parsers.MD5AnimParser;
-	import away3d.loaders.parsers.MD5MeshParser;
-	import away3d.materials.TextureMaterial;
-	import away3d.textures.BitmapTexture;
+	import away3d.animators.*;
+	import away3d.animators.data.*;
+	import away3d.core.pick.*;
+	import away3d.entities.*;
+	import away3d.events.*;
+	import away3d.library.*;
+	import away3d.library.assets.*;
+	import away3d.loaders.parsers.*;
+	import away3d.materials.*;
+	import away3d.textures.*;
 
 	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
 	public class PickingAnimatedTest extends PickingTestBase
@@ -38,7 +35,9 @@ package
 		private var HellKnight_Walk7:Class;
 
 		private var _bodyMaterial:TextureMaterial;
-		private var _animator:SmoothSkeletonAnimator;
+		private var _animator:SkeletonAnimator;
+		private var _animationSet:SkeletonAnimationSet;
+		private var _skeleton:Skeleton;
 		private var _mesh:Mesh;
 
 		public function PickingAnimatedTest() {
@@ -77,6 +76,7 @@ package
 				// Initialize material.
 				_mesh = event.asset as Mesh;
 				_mesh.scale( 3 );
+				_mesh.rotationY = 180;
 				_mesh.material = _bodyMaterial;
 				_mesh.castsShadows = true;
 				_mesh.showBounds = true;
@@ -89,24 +89,24 @@ package
 				// Apply interactivity.
 				_mesh.mouseEnabled = _mesh.mouseChildren = _mesh.shaderPickingDetails = true;
 				enableMeshMouseListeners( _mesh );
-
+			} else if (event.asset.assetType == AssetType.SKELETON) {
+				_skeleton = event.asset as Skeleton;	
+			} else if (event.asset.assetType == AssetType.ANIMATION_SET) {
+				_animationSet = event.asset as SkeletonAnimationSet;
+				_animator = new SkeletonAnimator(_animationSet, _skeleton);
+				
+				//apply animator to mesh
+				_mesh.animator = _animator;
 				//initialise animation data
-				loadAnimations();
+				AssetLibrary.loadData( new HellKnight_Walk7(), null, "walk7", new MD5AnimParser() );
 			}
-			else if( event.asset.assetType == AssetType.ANIMATION ) {
-				var seq:SkeletonAnimationSequence = event.asset as SkeletonAnimationSequence;
-				seq.name = event.asset.assetNamespace;
-				seq.looping = true;
-				_animator.addSequence(seq);
-				_animator.play( "walk7" );
+			else if( event.asset.assetType == AssetType.ANIMATION_STATE ) {
+				var state:SkeletonAnimationState = event.asset as SkeletonAnimationState;
+				var name : String = event.asset.assetNamespace;
+				_animationSet.addState(name, state);
+				_animator.play( name );
+				_animator.updateRootPosition = false;
 			}
-		}
-
-		private function loadAnimations():void {
-			_animator = new SmoothSkeletonAnimator( _mesh.animationState as SkeletonAnimationState );
-			_animator.updateRootPosition = false;
-			_animator.timeScale = 0.1;
-			AssetLibrary.loadData( new HellKnight_Walk7(), null, "walk7", new MD5AnimParser() );
 		}
 	}
 }
