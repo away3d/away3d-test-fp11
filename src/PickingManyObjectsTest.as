@@ -1,29 +1,30 @@
 package
 {
 
-	import away3d.core.base.Geometry;
 	import away3d.bounds.BoundingSphere;
+	import away3d.core.base.Geometry;
 	import away3d.core.pick.PickingColliderType;
 	import away3d.core.pick.PickingType;
 	import away3d.entities.Entity;
 	import away3d.entities.Mesh;
-	import away3d.events.MouseEvent3D;
 	import away3d.materials.ColorMaterial;
 	import away3d.primitives.CubeGeometry;
 	import away3d.primitives.CylinderGeometry;
-	import away3d.primitives.LineSegment;
+	import away3d.primitives.PlaneGeometry;
 	import away3d.primitives.SphereGeometry;
+
 	import flash.events.KeyboardEvent;
-	import flash.geom.Vector3D;
 	import flash.ui.Keyboard;
 
-	[SWF(backgroundColor="#000000", frameRate="60")]
+	[SWF(backgroundColor="#000000", frameRate="60", width="1024", height="768")]
 	public class PickingManyObjectsTest extends PickingTestBase
 	{
-		private var _blackMaterial:ColorMaterial;
-		private var _grayMaterial:ColorMaterial;
-		private var _blueMaterial:ColorMaterial;
-		private var _redMaterial:ColorMaterial;
+		// COLORS:
+		private var _blackMaterial:ColorMaterial; // elements that are ignored by the picking system ( mouseEnabled = false )
+		private var _grayMaterial:ColorMaterial; // elements that don't react to picking, but occlude picking on objects behind ( mouseEnabled = true but no listeners attached )
+		private var _blueMaterial:ColorMaterial; // elements that react to picking with bounds only ( mouseEnabled = true and listeners attached, with bounds precision )
+		private var _redMaterial:ColorMaterial; // elements that react to picking with geometry ( mouseEnabled = true and listeners attached, with triangle precision )
+
 		private var _entities:Vector.<Entity>;
 		private var _rotateEntities:Boolean;
 
@@ -39,9 +40,9 @@ package
 			_view.forceMouseMove = false;
 
 			// Choose global picking method
-//			_view.pickingMethod = GlobalPickingMethod.CPU;
-			_view.mousePicker = PickingType.RAYCAST_FIRST_ENCOUNTERED;
-//			_view.pickingMethod = GlobalPickingMethod.SHADER;
+//			_view.mousePicker = PickingType.RAYCAST_FIRST_ENCOUNTERED;
+//			_view.mousePicker = PickingType.RAYCAST_BEST_HIT;
+			_view.mousePicker = PickingType.SHADER;
 
 			// Init materials.
 			_blackMaterial = new ColorMaterial( 0x333333 );
@@ -52,6 +53,12 @@ package
 			_blueMaterial.lightPicker = _lightPicker;
 			_redMaterial = new ColorMaterial( 0xFF0000 );
 			_redMaterial.lightPicker = _lightPicker;
+
+			var useBothSides:Boolean = true; // when both sides = true, you should be able to pick on the backsides of planes
+			_blackMaterial.bothSides = useBothSides;
+			_grayMaterial.bothSides = useBothSides;
+			_blueMaterial.bothSides = useBothSides;
+			_redMaterial.bothSides = useBothSides;
 
 			// Init Objects.
 			createABunchOfObjects();
@@ -90,11 +97,14 @@ package
 			// Geometry.
 			var geometry:Geometry;
 			var randGeometry:Number = Math.random();
-			if( randGeometry > 0.66 ) {
+			if( randGeometry > 0.75 ) {
 				geometry = new CubeGeometry();
 			}
-			else if( randGeometry > 0.33 ) {
+			else if( randGeometry > 0.5 ) {
 				geometry = new SphereGeometry();
+			}
+			else if( randGeometry > 0.25 ) {
+				geometry = new PlaneGeometry();
 			}
 			else {
 				geometry = new CylinderGeometry();
@@ -111,7 +121,9 @@ package
 			if( usesTriangleCollider ) {
 				// Choose a triangle ray picking method.
 //				entity.pickingCollider = CpuPickingMethod.BOUNDS_ONLY;
-				entity.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
+//				entity.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
+//				entity.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+				entity.pickingCollider = PickingColliderType.PB_BEST_HIT;
 			}
 
 			// Randomize bounds type.

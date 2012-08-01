@@ -130,15 +130,15 @@ package
 		// MouseEvent handlers.
 		// ---------------------------------------------------------------------
 
-		protected function enableMeshMouseListeners( mesh:Mesh ):void {
-			mesh.addEventListener( MouseEvent3D.MOUSE_OVER, onMeshMouseOver );
-			mesh.addEventListener( MouseEvent3D.MOUSE_OUT, onMeshMouseOut );
-			mesh.addEventListener( MouseEvent3D.MOUSE_MOVE, onMeshMouseMove );
-			mesh.addEventListener( MouseEvent3D.MOUSE_DOWN, onMeshMouseDown );
-			mesh.addEventListener( MouseEvent3D.MOUSE_UP, onMeshMouseUp );
-			mesh.addEventListener( MouseEvent3D.CLICK, onMeshMouseClick );
-			mesh.addEventListener( MouseEvent3D.DOUBLE_CLICK, onMeshMouseDoubleClick );
-			mesh.addEventListener( MouseEvent3D.MOUSE_WHEEL, onMeshMouseWheel );
+		protected function enableMeshMouseListeners( container:ObjectContainer3D ):void {
+			container.addEventListener( MouseEvent3D.MOUSE_OVER, onMeshMouseOver );
+			container.addEventListener( MouseEvent3D.MOUSE_OUT, onMeshMouseOut );
+			container.addEventListener( MouseEvent3D.MOUSE_MOVE, onMeshMouseMove );
+			container.addEventListener( MouseEvent3D.MOUSE_DOWN, onMeshMouseDown );
+			container.addEventListener( MouseEvent3D.MOUSE_UP, onMeshMouseUp );
+			container.addEventListener( MouseEvent3D.CLICK, onMeshMouseClick );
+			container.addEventListener( MouseEvent3D.DOUBLE_CLICK, onMeshMouseDoubleClick );
+			container.addEventListener( MouseEvent3D.MOUSE_WHEEL, onMeshMouseWheel );
 		}
 
 		protected function onMeshMouseMove( event:MouseEvent3D ):void {
@@ -150,6 +150,7 @@ package
 
 			// Update picking normal.
 			_normalTracer.position = _locationTracer.position;
+//			trace( "scene normal: " + event.sceneNormal );
 			var normal:Vector3D = event.sceneNormal.clone();
 			normal.scaleBy( 25 );
 			var lineSegment:LineSegment = _normalTracer.getSegment( 0 ) as LineSegment;

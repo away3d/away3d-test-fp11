@@ -25,7 +25,7 @@ package
 
 
 
-	[SWF(backgroundColor="#000000", frameRate="60", quality="LOW")]
+	[ SWF( backgroundColor="#000000", frameRate="60" ) ]
 	public class PickingHeavyObjectTest extends PickingTestBase
 	{
 		[Embed(source="/../embeds/head/head.awd", mimeType="application/octet-stream")]
@@ -34,7 +34,7 @@ package
 		[Embed(source="/../embeds/troll/troll.AWD", mimeType="application/octet-stream")]
 		private var TrollAsset:Class;
 
-		private var _model:ObjectContainer3D;
+		private var _model:Entity;
 
 		public function PickingHeavyObjectTest() {
 			super();
@@ -61,7 +61,7 @@ package
 			if( _model ) {
 				_view.scene.removeChild( _model );
 			}
-			_model = new ObjectContainer3D();
+			_model = new Entity();
 			AssetLibrary.addEventListener( AssetEvent.ASSET_COMPLETE, onAssetComplete );
 			AssetLibrary.addEventListener( LoaderEvent.RESOURCE_COMPLETE, onResourceComplete );
 			AssetLibrary.loadData( data );
@@ -88,8 +88,8 @@ package
 			// Set up interactivity.
 //			_model.pickingCollider = PickingColliderType.BOUNDS_ONLY;
 //			_model.pickingCollider = PickingColliderType.AS3_FIRST_ENCOUNTERED;
-			_model.pickingCollider = PickingColliderType.PB_FIRST_ENCOUNTERED;
-//			_model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
+//			_model.pickingCollider = PickingColliderType.PB_FIRST_ENCOUNTERED;
+			_model.pickingCollider = PickingColliderType.AS3_BEST_HIT;
 
 			// Apply interactivity.
 			_model.mouseEnabled = _model.mouseChildren = _model.shaderPickingDetails = true;
